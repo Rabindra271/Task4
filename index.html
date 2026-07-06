@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Grocery Market</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <div class="logo-area">
+                <div class="logo"><i class="fa-solid fa-basket-shopping"></i></div>
+                <div>
+                    <h1>Fresh Grocery</h1>
+                    <p>Fresh Products Delivered Daily</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="icon-button"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="nav-link"><i class="fa-solid fa-heart"></i> Wishlist <span id="wishlistBadge">0</span></a>
+                <button id="cartToggle" class="button button-primary"><i class="fa-solid fa-cart-shopping"></i> Cart <span id="cartBadge">0</span></button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <span class="offer-badge">🔥 Flat 30% OFF</span>
+                <h2>Fresh Groceries<br>Delivered to<br>Your Doorstep</h2>
+                <p>Buy vegetables, fruits, dairy, snacks, household items and much more. Fresh quality with fast delivery.</p>
+                <div class="hero-buttons">
+                    <button class="button button-primary">Shop Now</button>
+                    <button class="button button-secondary">Explore</button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900" alt="Groceries">
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+            <div class="feature-card"><i class="fa-solid fa-truck-fast"></i><h3>Free Delivery</h3><p>Orders above $50</p></div>
+            <div class="feature-card"><i class="fa-solid fa-seedling"></i><h3>Fresh Products</h3><p>Farm Fresh Everyday</p></div>
+            <div class="feature-card"><i class="fa-solid fa-percent"></i><h3>Best Discounts</h3><p>Save More Daily</p></div>
+            <div class="feature-card"><i class="fa-solid fa-headset"></i><h3>24/7 Support</h3><p>Always Available</p></div>
+        </section>
+
+        <!-- CATEGORY CARDS -->
+        <section class="category-section">
+            <h2>Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card">🥛<span>Dairy</span></div>
+                <div class="category-card">🍎<span>Fruits</span></div>
+                <div class="category-card">🥦<span>Vegetables</span></div>
+                <div class="category-card">🍚<span>Grains</span></div>
+                <div class="category-card">🍞<span>Bakery</span></div>
+                <div class="category-card">🥤<span>Beverages</span></div>
+                <div class="category-card">🍪<span>Snacks</span></div>
+                <div class="category-card">🧂<span>Spices</span></div>
+                <div class="category-card">🥫<span>Canned</span></div>
+                <div class="category-card">🧼<span>Household</span></div>
+            </div>
+        </section>
+
+        <!-- SEARCH FILTERS -->
+        <section class="filters-grid">
+            <div class="control-group">
+                <label>Search Products</label>
+                <input id="searchInput" type="search" placeholder="Search grocery products...">
+            </div>
+            <div class="control-group">
+                <label>Category</label>
+                <select id="categoryFilter"><option value="all">All Categories</option></select>
+            </div>
+            <div class="control-group">
+                <label>Price Range</label>
+                <div class="price-range-inputs"><input id="minPrice" type="number"><span>-</span><input id="maxPrice" type="number"></div>
+                <div class="price-range-sliders"><input id="minPriceRange" type="range"><input id="maxPriceRange" type="range"></div>
+            </div>
+            <div class="control-group">
+                <label>Sort By</label>
+                <select id="sortSelect"><option value="price-asc">Price Low → High</option><option value="price-desc">Price High → Low</option><option value="rating-desc">Highest Rated</option><option value="name-asc">A → Z</option></select>
+            </div>
+        </section>
+
+        <section class="product-summary">
+            <div id="productCount">Showing Products</div>
+            <div class="status-pill">50 Grocery Products</div>
+        </section>
+
+        <!-- PRODUCT GRID STARTS HERE -->
+        <main class="product-grid" id="productGrid"><!-- Product cards are generated dynamically by script.js --></main>
+
+        <!-- Quick View Modal -->
+        <div class="modal-backdrop hidden" id="quickViewModal">
+            <div class="modal-card">
+                <button id="closeModal" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+                <div id="modalBody" class="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Shopping Cart -->
+        <aside class="cart-drawer hidden" id="cartDrawer">
+            <div class="cart-header">
+                <div>
+                    <h2>Shopping Cart</h2>
+                    <p id="cartSummary">0 Items</p>
+                </div>
+                <button id="closeCart" class="icon-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-footer">
+                <div class="cart-total">Total <span id="cartTotal">$0.00</span></div>
+                <button id="checkoutButton" class="button button-primary"><i class="fa-solid fa-credit-card"></i> Checkout</button>
+            </div>
+        </aside>
+
+        <!-- Promotional Banner -->
+        <section class="offer-section">
+            <div class="offer-card">
+                <div>
+                    <h2>Weekend Grocery Sale</h2>
+                    <p>Get up to <strong>40% OFF</strong> on selected grocery products.</p>
+                </div>
+                <button class="button button-primary">Shop Deals</button>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to receive fresh offers every week.</p>
+            <div class="newsletter-box"><input type="email" placeholder="Enter your email"><button class="button button-primary">Subscribe</button></div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats">
+            <div class="stat-card"><h2>50+</h2><p>Grocery Products</p></div>
+            <div class="stat-card"><h2>10+</h2><p>Categories</p></div>
+            <div class="stat-card"><h2>5K+</h2><p>Happy Customers</p></div>
+            <div class="stat-card"><h2>24/7</h2><p>Customer Support</p></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="footer-grid">
+                <div>
+                    <h3>Fresh Grocery</h3>
+                    <p>Fresh groceries delivered quickly with premium quality and affordable prices.</p>
+                </div>
+                <div>
+                    <h4>Shop</h4>
+                    <ul><li>Dairy</li><li>Vegetables</li><li>Fruits</li><li>Bakery</li></ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul><li>About</li><li>Contact</li><li>Support</li><li>Privacy</li></ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-icons"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-x-twitter"></i><i class="fab fa-youtube"></i></div>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© 2026 Fresh Grocery Market. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
